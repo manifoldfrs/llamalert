@@ -1,0 +1,43 @@
+# Project Instructions
+
+Follow these guidelines when building LLaMAlert (see README.md).
+
+## General
+- Always write complete, production-ready code; no placeholders or stubs.
+- Enforce strict typing, clear error handling and consistent formatting.
+- Include docstrings, comments and adhere to style guides for each language.
+- Never commit secrets; use environment variables.
+
+## Frontend (React + TypeScript)
+- Use function components + React.memo and custom hooks (`useX`).
+- Enable TS strict mode, explicit `Props` interfaces, avoid `any`.
+- Build forms for typing biometrics and geolocation; show real-time confidence bars (0–100%), green for legit, red for anomalies.
+- Apply minimalist, professional styling; follow accessible color and spacing standards.
+- Test with Jest + React Testing Library; cover UI, hooks and edge states.
+
+## Backend (Python + FastAPI)
+- Use async FastAPI (`async def`) with Pydantic models for request/response.
+- Expose `/infer` endpoint for anomaly detection; optional CRUD for synthetic data.
+- Adhere to PEP 8, include type hints and comprehensive docstrings.
+- Integrate OpenTelemetry spans around inference and DB operations.
+- Return structured JSON errors with HTTP status codes.
+
+## Database (PostgreSQL)
+- Schema: typing metrics, geolocation, inference logs with `created_at`/`updated_at`.
+- Manage schema via Alembic migrations; enforce constraints and indexes on heavy queries.
+- Use async driver or SQLAlchemy ORM; pool connections efficiently.
+
+## LLM Integration
+- Load and cache LLaMA-2-7B from Hugging Face; target <2 s per request.
+- Craft clear prompts for typing-pattern and location anomalies.
+- Gracefully handle model/IO errors and fallbacks.
+
+## Deployment (Vercel)
+- Deploy frontend and FastAPI backend as serverless functions.
+- Configure `vercel.json` for build/dev commands; manage env vars in dashboard.
+- Monitor performance and logs via Vercel analytics.
+
+## Testing & CI
+- Frontend: Jest + React Testing Library.
+- Backend: pytest with coverage; test business logic, endpoints, error paths.
+- CI: lint, type-check and run all tests on every push.
